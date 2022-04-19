@@ -13,7 +13,7 @@
         <h1>{{objetoRecibido}}</h1>
         <div class="row mt-4 text-black text-center">
             <carta-personaje v-for="personaje in personajesRickAndMorty" :key="personaje.id" :personaje="personaje" :imagen="personaje.image" :nombre="personaje.name" @carta-personaje-click="recibirObjeto($event)"></carta-personaje>
-            <!--carta-personaje v-for="personaje in personajesBreakingBad" :key="personaje.id" :personaje="personaje" :imagen="personaje.img" :nombre="personaje.name" @carta-personaje-click="recibirObjeto($event)"></carta-personaje-->
+            <carta-personaje v-for="personaje in personajesBreakingBad" :key="personaje.id" :personaje="personaje" :imagen="personaje.img" :nombre="personaje.name" @carta-personaje-click="recibirObjeto($event)"></carta-personaje>
         </div>
     </div>
 </body>
@@ -23,7 +23,7 @@
     Vue.component('carta-personaje',{
         template:`<div class= "col-4 mt-4">
             <div class="card col-4 mt-4" style="width: 18rem;">
-                <img src={{imagen}} class="card-img-top">
+                <img :src="imagen" class="card-img-top">
                 <div class="card-body">
                     <h5 class="card-title">{{nombre}}</h5>
                 </div>
@@ -33,7 +33,7 @@
         props:['personaje', 'imagen', 'nombre'],
         methods:{
             mostrar(){
-                this.$emit('carta-personaje-click', 'personaje')
+                this.$emit('carta-personaje-click', this.nombre)
             }
         }
     })
@@ -52,7 +52,7 @@
         methods:{
             recibirObjeto(objeto){
                 console.log(objeto)
-                objetoRecibido = objeto;
+                this.objetoRecibido = objeto;
             }
         },
         async created(){
